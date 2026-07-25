@@ -20,4 +20,4 @@ spec:
         image: sunbeamak/nexguard:latest
         imagePullPolicy: "Always"
         ports:
-        - containerPort: 3000
+        - containerPort: 80
