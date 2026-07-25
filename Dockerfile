@@ -2,6 +2,12 @@ FROM node:18 AS build
 
 WORKDIR /app
 
+# Receive the build argument from Jenkins
+ARG REACT_APP_RAPID_API_KEY
+
+# Make it available to React during npm run build
+ENV REACT_APP_RAPID_API_KEY=$REACT_APP_RAPID_API_KEY
+
 COPY frontend/package*.json ./
 RUN npm install
 
