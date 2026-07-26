@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import ReactPlayer from "react-player";
 import { Typography, Box, Stack } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
@@ -34,12 +33,14 @@ const VideoDetail = () => {
         <Box flex={1}>
           <Box sx={{ width: "100%", position: "sticky", top: "86px" }}>
 
-            <ReactPlayer
-              url={`https://www.youtube.com/watch?v=${id}`}
+            <iframe
               width="100%"
-              height="500px"
-              controls={true}
-              playing={false}
+              height="500"
+              src={`https://www.youtube.com/embed/${id}`}
+              title="YouTube Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
             />
 
             <Typography
