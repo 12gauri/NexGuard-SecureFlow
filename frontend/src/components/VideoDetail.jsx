@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import ReactPlayer from "react-player";
 import { Typography, Box, Stack } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
@@ -19,14 +18,17 @@ const VideoDetail = () => {
 
     fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`)
       .then((data) => setVideos(data.items));
-
   }, [id]);
 
   if (!videoDetail?.snippet) return <Loader />;
 
   const {
     snippet: { title, channelId, channelTitle },
+
     statistics: { viewCount, likeCount }
+
+    statistics: { viewCount, likeCount },
+
   } = videoDetail;
 
   return (
@@ -35,8 +37,7 @@ const VideoDetail = () => {
       <Stack direction={{ xs: "column", md: "row" }}>
 
         <Box flex={1}>
-
-          <Box
+         <Box
             sx={{
               width: "100%",
               position: "sticky",
@@ -48,7 +49,19 @@ const VideoDetail = () => {
               url={`https://www.youtube.com/watch?v=${id}`}
               className="react-player"
               controls
-            />
+
+          <Box sx={{ width: "100%", position: "sticky", top: "86px" }}>
+
+            <iframe
+              width="100%"
+              height="500"
+              src={`https://www.youtube.com/embed/${id}`}
+              title="YouTube Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+
+              />
 
             <Typography
               color="#fff"
@@ -58,7 +71,6 @@ const VideoDetail = () => {
             >
               {title}
             </Typography>
-
 
             <Stack
               direction="row"
@@ -74,18 +86,26 @@ const VideoDetail = () => {
 
                   {channelTitle}
 
+              <Link to={`/channel/${channelId}`}>
+                <Typography variant="h6" color="#fff">
+                  {channelTitle}
+
                   <CheckCircleIcon
                     sx={{
                       fontSize: "12px",
                       color: "gray",
+
                       ml: "5px"
+                    }}
+                  />
+
+                      ml: "5px",
                     }}
                   />
 
                 </Typography>
 
               </Link>
-
 
               <Stack
                 direction="row"
@@ -98,6 +118,14 @@ const VideoDetail = () => {
                 </Typography>
 
                 <Typography sx={{ opacity: 0.7 }}>
+
+              <Stack direction="row" gap="20px" alignItems="center">
+                <Typography variant="body1" sx={{ opacity: 0.7 }}>
+                  {parseInt(viewCount).toLocaleString()} views
+                </Typography>
+
+                <Typography variant="body1" sx={{ opacity: 0.7 }}>
+
                   {parseInt(likeCount).toLocaleString()} likes
                 </Typography>
 
@@ -109,6 +137,7 @@ const VideoDetail = () => {
           </Box>
 
         </Box>
+
 
 
         <Box
@@ -125,6 +154,14 @@ const VideoDetail = () => {
             videos={videos}
             direction="column"
           />
+
+        <Box
+          px={2}
+          py={{ md: 1, xs: 5 }}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Videos videos={videos} />
 
         </Box>
 
