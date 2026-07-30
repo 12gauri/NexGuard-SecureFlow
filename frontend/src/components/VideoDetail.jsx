@@ -27,8 +27,7 @@ const VideoDetail = () => {
 
     statistics: { viewCount, likeCount }
 
-    statistics: { viewCount, likeCount },
-
+    
   } = videoDetail;
 
   return (
